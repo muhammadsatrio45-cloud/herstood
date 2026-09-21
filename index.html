@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lacak pesanan HERSTOOD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">
+<style id="app-css">:root {
+  --shell: #FDF2F7;
+  --surface: #FFFFFF;
+  --cream: #F7EFE2;
+  --hot: #F33781;
+  --deep: #A81555;
+  --ink: #3A1026;
+  --ink-soft: #8A5E73;
+  --line: #F6CEE1;
+  --focus: #A81555;
+  --btn-bg: #F33781;
+  --btn-fg: #FFFFFF;
+  --err: #C0203C;
+  --glow: rgba(243, 55, 129, 0.22);
+  --f-head: 'Fredoka', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --shell: #1A0812;
+    --surface: #2B1020;
+    --cream: #3A1729;
+    --hot: #FF74AD;
+    --deep: #FFA7C9;
+    --ink: #FDEAF3;
+    --ink-soft: #C79BB2;
+    --line: #4B1F36;
+    --focus: #FF74AD;
+    --btn-bg: #FF74AD;
+    --btn-fg: #2B1020;
+    --err: #FF9C94;
+    --glow: rgba(255, 116, 173, 0.25);
+  }
+}
+:root[data-theme="dark"] {
+  --shell: #1A0812;
+  --surface: #2B1020;
+  --cream: #3A1729;
+  --hot: #FF74AD;
+  --deep: #FFA7C9;
+  --ink: #FDEAF3;
+  --ink-soft: #C79BB2;
+  --line: #4B1F36;
+  --focus: #FF74AD;
+  --btn-bg: #FF74AD;
+  --btn-fg: #2B1020;
+  --err: #FF9C94;
+  --glow: rgba(255, 116, 173, 0.25);
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--shell); }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0;
+  background: var(--shell);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--f-body);
+  -webkit-text-size-adjust: 100%;
+}
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.edge {
+  height: 12px;
+  background: repeating-linear-gradient(115deg,
+    var(--hot) 0 18px, var(--cream) 18px 30px);
+}
+.wrap { max-width: 640px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+.top { padding-top: 20px; display: flex; align-items: center; gap: 13px; }
+.logo {
+  width: 54px; height: 54px; flex: none;
+  border-radius: 18px;
+  background-image: url("data:image/webp;base64,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");
+  background-size: cover; background-position: center;
+  box-shadow: 0 0 0 3px var(--surface), 0 6px 16px var(--glow);
+}
+.brand { font: 700 24px/1 var(--f-head); letter-spacing: 0.07em; color: var(--deep); }
+.brand-sub { margin-top: 3px; color: var(--ink-soft); font-size: 14px; }
+.main { padding-top: 26px; padding-bottom: 36px; min-height: 60vh; }
+
+h1 { margin: 0 0 8px; font: 600 clamp(29px, 7.4vw, 40px)/1.12 var(--f-head); color: var(--deep); }
+h3 { margin: 26px 0 10px; font: 600 18px/1.25 var(--f-head); color: var(--deep); }
+.lead { margin: 0 0 20px; color: var(--ink-soft); max-width: 46ch; }
+.sub { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+.search { display: grid; gap: 8px; }
+.search label { font-weight: 600; font-size: 15px; }
+input[type="text"], input[type="password"], input[type="date"], input[type="number"], select, textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 500 16px/1.3 var(--f-body);
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { border-color: var(--hot); }
+textarea { min-height: 96px; resize: vertical; }
+#kode { font: 600 19px/1.2 var(--f-head); letter-spacing: 0.05em; text-transform: uppercase; }
+#kode::placeholder { font-weight: 400; color: var(--ink-soft); opacity: 0.75; }
+
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 24px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: 600 15px/1.2 var(--f-head);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 5px 14px var(--glow);
+}
+.btn:disabled { opacity: 0.55; cursor: default; box-shadow: none; }
+.btn.ghost { background: var(--surface); color: var(--deep); border: 2px solid var(--line); box-shadow: none; }
+.btn.small { padding: 9px 16px; font-size: 14px; }
+.btn.danger { background: var(--surface); color: var(--err); border: 2px solid var(--err); box-shadow: none; }
+.search .btn { justify-self: start; margin-top: 4px; }
+
+.msg { min-height: 1.4em; margin: 10px 0 0; font-size: 15px; }
+.msg.err { color: var(--err); }
+.msg.ok { color: var(--deep); }
+.out { margin-top: 14px; }
+
+.card {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 26px;
+  padding: 22px 20px 24px;
+  box-shadow: 0 14px 34px var(--glow);
+}
+.card-head { display: grid; gap: 10px; }
+.kode { margin: 0; font: 600 clamp(20px, 5.4vw, 26px)/1.15 var(--f-head); letter-spacing: 0.04em; color: var(--deep); overflow-wrap: anywhere; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.who { margin: 12px 0 0; color: var(--ink-soft); }
+.who strong { color: var(--ink); }
+
+.now {
+  margin-top: 18px; padding: 16px 18px;
+  background: linear-gradient(135deg, var(--hot), color-mix(in srgb, var(--hot) 68%, var(--deep)));
+  border-radius: 20px; color: #FFFFFF;
+}
+.now p { margin: 0; }
+.now-lbl { font-size: 14px; opacity: 0.9; }
+.now-val { font: 600 clamp(21px, 5.6vw, 26px)/1.2 var(--f-head); margin-top: 3px !important; }
+.now-when { font-size: 14px; opacity: 0.9; margin-top: 3px !important; }
+
+.items { list-style: none; margin: 0; padding: 0; }
+.items li { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-top: 2px dotted var(--line); }
+.items li:first-child { border-top: 0; }
+.items .qty { font-weight: 700; white-space: nowrap; color: var(--deep); }
+.items .var { color: var(--ink-soft); font-size: 14px; }
+
+.resi {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; background: var(--cream); border-radius: 18px; margin-top: 22px;
+}
+.resi p { margin: 0; }
+.resi-no { font: 600 19px/1.25 var(--f-head); letter-spacing: 0.04em; color: var(--deep); overflow-wrap: anywhere; }
+
+.route { list-style: none; margin: 4px 0 0; padding: 0 0 0 26px; position: relative; display: grid; gap: 12px; }
+.route::before { content: ""; position: absolute; left: 7px; top: 16px; bottom: 16px; border-left: 3px dotted var(--line); }
+.stamp { position: relative; }
+.stamp::before {
+  content: ""; position: absolute; left: -26px; top: 15px; width: 13px; height: 13px;
+  border-radius: 50%; background: var(--surface); border: 3px solid var(--line);
+}
+.stamp.done::before { background: var(--hot); border-color: var(--hot); }
+.stamp.now::before { background: var(--hot); border-color: var(--hot); box-shadow: 0 0 0 5px var(--glow); }
+.mark {
+  display: inline-flex; flex-direction: column; gap: 1px;
+  padding: 10px 18px;
+  border-radius: 18px;
+  background: var(--cream);
+  color: var(--ink);
+}
+.stamp.now .mark {
+  background: var(--surface);
+  border: 2px solid var(--hot);
+  color: var(--deep);
+  box-shadow: 0 6px 16px var(--glow);
+  animation: pop 0.38s ease-out 1 both;
+}
+.stamp.now .s-status::after { content: " \u2726"; color: var(--hot); }
+.stamp.next .mark { background: transparent; border: 2px dashed var(--line); color: var(--ink-soft); }
+.s-status { font: 600 16px/1.25 var(--f-head); }
+.s-date { font-size: 13px; font-weight: 600; opacity: 0.8; }
+.s-note { margin: 6px 0 0 4px; font-size: 14.5px; color: var(--ink-soft); max-width: 46ch; }
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .stamp.now .mark { animation: none; } }
+
+.foot { padding-top: 8px; padding-bottom: 44px; color: var(--ink-soft); font-size: 13.5px; }
+.foot p { margin: 0 0 6px; max-width: 52ch; }
+.linkbtn { appearance: none; background: none; border: 0; padding: 4px 0; color: var(--deep); font: 600 14px/1.2 var(--f-body); cursor: pointer; text-decoration: underline; }
+
+/* admin */
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.panel { border: 2px solid var(--line); background: var(--surface); border-radius: 22px; padding: 18px; margin-bottom: 18px; display: grid; gap: 12px; }
+.panel h3 { margin: 0; }
+.field { display: grid; gap: 5px; font-size: 14px; font-weight: 600; }
+.field span { color: var(--ink-soft); font-weight: 600; }
+.two { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 460px) { .two { grid-template-columns: 1fr; } }
+.rows { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.row { border: 2px solid var(--line); background: var(--surface); border-radius: 20px; padding: 14px 16px; }
+.row-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.row-title { font: 600 16px/1.25 var(--f-head); letter-spacing: 0.03em; color: var(--deep); overflow-wrap: anywhere; }
+.row-sub { color: var(--ink-soft); font-size: 14px; }
+.tag { display: inline-block; padding: 3px 12px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 600; }
+.editor { display: grid; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 2px dotted var(--line); }
+.editor h4 { margin: 0; font: 600 15px/1.3 var(--f-head); color: var(--deep); }
+.evs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.evs li { display: flex; justify-content: space-between; gap: 10px; align-items: center; font-size: 14.5px; }
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); border-top: 3px solid var(--hot);
+  box-shadow: 0 -8px 24px var(--glow);
+}
+.bar[hidden] { display: none; }
+.bar p { margin: 0; font-weight: 600; font-size: 14.5px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script id="vault" type="application/json">{"v":1,"salt":"/Px6PDgD5+YusrCwDuAc0w==","updated":"2026-09-21T09:00:00.000Z","hint":"","c":{},"a":{"v":"rG4AZZRsNoa3Qrzg","c":"MNIQaPcfXlY1fUTD4ABJxYM4/V9gNl8mYKsRa/U="}}</script>
+<script id="app-src">(function () {
+  'use strict';
+
+  var STANDALONE = true; // true = versi untuk hosting sendiri (tanpa runtime Claude)
+  var ITER = 100000;
+  var TAHAP = ['Sudah di-PO', 'Diproses WH luar', 'Dikirim ke Indonesia', 'Tiba di Indonesia', 'Dikirim ke customer', 'Selesai'];
+  var NEGARA = {
+    KR: { n: 'Korea', f: '\uD83C\uDDF0\uD83C\uDDF7' },
+    JP: { n: 'Jepang', f: '\uD83C\uDDEF\uD83C\uDDF5' },
+    TH: { n: 'Thailand', f: '\uD83C\uDDF9\uD83C\uDDED' },
+    CN: { n: 'China', f: '\uD83C\uDDE8\uD83C\uDDF3' },
+    EV: { n: 'Event Jastip', f: '\uD83C\uDFAA' },
+    PS: { n: 'Produk HERSTOOD', f: '\uD83C\uDFF7\uFE0F' }
+  };
+  var ALPH = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+  var enc = new TextEncoder();
+  var dec = new TextDecoder();
+
+  /* ---------- helpers ---------- */
+  var b64 = {
+    to: function (buf) {
+      var a = new Uint8Array(buf), s = '';
+      for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]);
+      return btoa(s);
+    },
+    from: function (str) {
+      var s = atob(str), a = new Uint8Array(s.length);
+      for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i);
+      return a;
+    }
+  };
+  function hex(a) {
+    var s = '';
+    for (var i = 0; i < a.length; i++) s += a[i].toString(16).padStart(2, '0');
+    return s;
+  }
+  function norm(k) { return String(k || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+  function newSalt() { return b64.to(crypto.getRandomValues(new Uint8Array(16))); }
+  function genKode(neg) {
+    var a = crypto.getRandomValues(new Uint8Array(8)), s = '';
+    for (var i = 0; i < 8; i++) s += ALPH[a[i] % ALPH.length];
+    return 'HERSTOOD-' + neg + '-' + s.slice(0, 4) + '-' + s.slice(4);
+  }
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function fmtDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
+    if (!m) return iso || '';
+    var d = new Date(+m[1], +m[2] - 1, +m[3]);
+    return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  function parseItems(t) {
+    return String(t || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean).map(function (l) {
+      var p = l.split('|').map(function (x) { return x.trim(); });
+      var q = parseInt(p[2], 10);
+      return { nama: p[0], varian: p[1] || '', qty: q > 0 ? q : 1 };
+    });
+  }
+  function itemsToText(items) {
+    return (items || []).map(function (i) { return [i.nama, i.varian, i.qty].join(' | '); }).join('\n');
+  }
+
+  /* ---------- crypto ---------- */
+  async function derive(secret, saltB64) {
+    var base = await crypto.subtle.importKey('raw', enc.encode(secret), 'PBKDF2', false, ['deriveBits']);
+    var bits = new Uint8Array(await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt: b64.from(saltB64), iterations: ITER, hash: 'SHA-256' }, base, 384));
+    var key = await crypto.subtle.importKey('raw', bits.slice(16, 48), 'AES-GCM', false, ['encrypt', 'decrypt']);
+    return { idx: hex(bits.slice(0, 16)), key: key };
+  }
+  async function encryptWith(obj, key) {
+    var iv = crypto.getRandomValues(new Uint8Array(12));
+    var ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, enc.encode(JSON.stringify(obj)));
+    return { v: b64.to(iv), c: b64.to(ct) };
+  }
+  async function decryptWith(blob, key) {
+    var pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64.from(blob.v) }, key, b64.from(blob.c));
+    return JSON.parse(dec.decode(new Uint8Array(pt)));
+  }
+  async function sealFor(secret, obj, salt) {
+    var d = await derive(secret, salt);
+    return { idx: d.idx, blob: await encryptWith(obj, d.key) };
+  }
+  function customerView(o) {
+    return { kode: o.kode, username: o.username, negara: o.negara, batch: o.batch, items: o.items, events: o.events, resi: o.resi || null };
+  }
+  function adminView(o) {
+    var c = customerView(o);
+    c.idx = o.idx || null;
+    return c;
+  }
+
+  /* ---------- document assembly (used to republish this same page) ---------- */
+  function assembleDoc(css, src, vault) {
+    var data = JSON.stringify(vault).replace(/</g, '\\u003c');
+    var end = '<' + '/script>';
+    return '<!doctype html>\n<html lang="id">\n<head>\n<meta charset="utf-8">\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' +
+      '<title>Lacak pesanan HERSTOOD</title>\n' +
+      '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+      '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap">\n' +
+      '<style id="app-css">' + css + '</style>\n</head>\n<body>\n<div id="root"></div>\n' +
+      '<script id="vault" type="application/json">' + data + end + '\n' +
+      '<script id="app-src">' + src + end + '\n</body>\n</html>\n';
+  }
+
+  /* ---------- tiny DOM helper ---------- */
+  function el(tag, props) {
+    var n = document.createElement(tag);
+    if (props) {
+      Object.keys(props).forEach(function (k) {
+        var v = props[k];
+        if (v == null || v === false) return;
+        if (k === 'class') n.className = v;
+        else if (k === 'value') n.value = v;
+        else if (k.slice(0, 2) === 'on') n.addEventListener(k.slice(2), v);
+        else if (v === true) n.setAttribute(k, '');
+        else n.setAttribute(k, v);
+      });
+    }
+    for (var i = 2; i < arguments.length; i++) add(n, arguments[i]);
+    return n;
+  }
+  function add(n, k) {
+    if (k == null || k === false) return;
+    if (Array.isArray(k)) k.forEach(function (x) { add(n, x); });
+    else n.appendChild(typeof k === 'string' ? document.createTextNode(k) : k);
+  }
+  function button(label, onclick, cls) {
+    return el('button', { type: 'button', class: 'btn ' + (cls || ''), onclick: onclick }, label);
+  }
+  function field(label, node) { return el('label', { class: 'field' }, el('span', null, label), node); }
+
+  /* ---------- app state ---------- */
+  var vault, css, src, main, foot, barEl, adminSlot;
+  var art = null, canEdit = false, state = null, view = 'customer';
+  var ui = { panel: null, open: null, filter: '' };
+
+  /* ---------- customer side ---------- */
+  async function lookup(kodeRaw) {
+    var k = norm(kodeRaw);
+    var d = await derive('K|' + k, vault.salt);
+    var blob = vault.c[d.idx];
+    if (!blob) return null;
+    try { return await decryptWith(blob, d.key); } catch (e) { return null; }
+  }
+
+  function route(o) {
+    var ul = el('ol', { class: 'route' });
+    var ev = o.events || [];
+    ev.forEach(function (e, i) {
+      var now = i === ev.length - 1;
+      ul.appendChild(el('li', { class: 'stamp ' + (now ? 'now' : 'done'), 'aria-current': now ? 'step' : null },
+        el('div', { class: 'mark' }, el('span', { class: 's-status' }, e.status), el('span', { class: 's-date' }, fmtDate(e.tgl))),
+        e.catatan ? el('p', { class: 's-note' }, e.catatan) : null));
+    });
+    var last = -1;
+    ev.forEach(function (e) { last = Math.max(last, TAHAP.indexOf(e.status)); });
+    if (last >= 0) {
+      TAHAP.slice(last + 1).forEach(function (t) {
+        ul.appendChild(el('li', { class: 'stamp next' },
+          el('div', { class: 'mark' }, el('span', { class: 's-status' }, t), el('span', { class: 's-date' }, 'Belum'))));
+      });
+    }
+    return ul;
+  }
+
+  function copyText(text, btn) {
+    var done = function (ok) {
+      btn.textContent = ok ? 'Tersalin' : 'Salin manual';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 1800);
+    };
+    try {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } catch (e) { done(false); }
+  }
+
+  function orderCard(o) {
+    var ev = o.events || [];
+    var cur = ev.length ? ev[ev.length - 1] : null;
+    var ng = NEGARA[o.negara] || { n: o.negara || '', f: '' };
+    var card = el('article', { class: 'card' });
+    card.appendChild(el('div', { class: 'card-head' },
+      el('h2', { class: 'kode' }, o.kode),
+      el('div', { class: 'chips' },
+        el('span', { class: 'chip' }, (ng.f ? ng.f + ' ' : '') + ng.n),
+        o.batch ? el('span', { class: 'chip' }, 'Batch ' + o.batch) : null)));
+    card.appendChild(el('p', { class: 'who' }, 'Atas nama ', el('strong', null, o.username || '-')));
+    card.appendChild(el('div', { class: 'now' },
+      el('p', { class: 'now-lbl' }, 'Status sekarang'),
+      el('p', { class: 'now-val' }, cur ? cur.status : 'Belum ada status'),
+      cur ? el('p', { class: 'now-when' }, 'Diperbarui ' + fmtDate(cur.tgl)) : null));
+
+    card.appendChild(el('h3', null, 'Barang pesanan'));
+    var ul = el('ul', { class: 'items' });
+    (o.items || []).forEach(function (i) {
+      ul.appendChild(el('li', null,
+        el('div', null, el('div', null, i.nama), i.varian ? el('div', { class: 'var' }, i.varian) : null),
+        el('span', { class: 'qty' }, '\u00D7' + i.qty)));
+    });
+    card.appendChild(ul);
+
+    if (o.resi && o.resi.nomor) {
+      var cp = el('button', { type: 'button', class: 'btn ghost small' }, 'Salin');
+      cp.addEventListener('click', function () { copyText(o.resi.nomor, cp); });
+      card.appendChild(el('div', { class: 'resi' },
+        el('div', null,
+          el('p', { class: 'sub' }, 'Resi pengiriman' + (o.resi.ekspedisi ? ' ' + o.resi.ekspedisi : '')),
+          el('p', { class: 'resi-no' }, o.resi.nomor)),
+        cp));
+    }
+
+    card.appendChild(el('h3', null, 'Perjalanan pesanan'));
+    card.appendChild(route(o));
+    return card;
+  }
+
+  function showCustomer() {
+    view = 'customer';
+    main.textContent = '';
+    updateBar();
+    var input = el('input', {
+      id: 'kode', type: 'text', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false',
+      placeholder: 'HERSTOOD-KR-XXXX-XXXX', 'aria-describedby': 'kode-help'
+    });
+    var btn = el('button', { type: 'button', class: 'btn' }, 'Lacak pesanan');
+    var msg = el('p', { class: 'msg' });
+    var out = el('div', { class: 'out', 'aria-live': 'polite' });
+
+    async function run() {
+      if (norm(input.value).length < 6) {
+        msg.className = 'msg err';
+        msg.textContent = 'Masukkan kode order lengkap dari admin.';
+        out.textContent = '';
+        return;
+      }
+      btn.disabled = true; btn.textContent = 'Mencari\u2026'; msg.textContent = '';
+      try {
+        var o = await lookup(input.value);
+        out.textContent = '';
+        if (!o) {
+          msg.className = 'msg err';
+          msg.textContent = 'Kode order tidak ditemukan. Cek lagi penulisannya, atau tanya admin HERSTOOD.';
+        } else {
+          out.appendChild(orderCard(o));
+        }
+      } catch (e) {
+        msg.className = 'msg err';
+        msg.textContent = 'Gagal memuat data. Coba muat ulang halaman ini.';
+      } finally {
+        btn.disabled = false; btn.textContent = 'Lacak pesanan';
+      }
+    }
+    btn.addEventListener('click', run);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+
+    main.appendChild(el('h1', null, 'Sudah sampai mana barangmu?'));
+    main.appendChild(el('p', { class: 'lead' }, 'Masukkan kode order yang dikirim admin HERSTOOD untuk melihat status pesananmu.'));
+    main.appendChild(el('div', { class: 'search' },
+      el('label', { for: 'kode' }, 'Kode order'),
+      input,
+      vault.hint ? el('p', { class: 'sub', id: 'kode-help' }, vault.hint) : el('p', { class: 'sub', id: 'kode-help' }, 'Kode dikirim admin lewat chat setelah pesananmu dicatat.'),
+      btn));
+    main.appendChild(msg);
+    main.appendChild(out);
+    renderFoot();
+  }
+
+  /* ---------- admin side ---------- */
+  async function openState(pass) {
+    var d = await derive('A|' + pass, vault.salt);
+    var data = await decryptWith(vault.a, d.key);
+    return { orders: data.orders, pass: pass, origPass: pass, hint: vault.hint || '', dirty: false, dirtySet: new Set() };
+  }
+  function store(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* ignore */ } }
+  function unstore(k) { try { sessionStorage.removeItem(k); } catch (e) { /* ignore */ } }
+  function fetchStore(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+
+  function markDirty(o) {
+    state.dirty = true;
+    if (o) state.dirtySet.add(o.kode);
+  }
+  function sortEvents(o) {
+    o.events = o.events.map(function (e, i) { return { e: e, i: i }; })
+      .sort(function (a, b) { return a.e.tgl < b.e.tgl ? -1 : a.e.tgl > b.e.tgl ? 1 : a.i - b.i; })
+      .map(function (x) { return x.e; });
+  }
+  function errText(e) {
+    var c = e && e.code;
+    if (c === 'not_writer' || c === 'not_granted' || c === 'capability_disabled') return 'Akun ini tidak punya izin menerbitkan halaman.';
+    if (c === 'rate_limited') return 'Terlalu sering menerbitkan. Tunggu sebentar, lalu coba lagi.';
+    if (c === 'too_large') return 'Data terlalu besar untuk diterbitkan.';
+    return 'Gagal menerbitkan. Perubahanmu masih tersimpan di halaman ini, coba lagi.';
+  }
+
+  function showAdminLock(text) {
+    view = 'admin';
+    main.textContent = '';
+    updateBar();
+    var pw = el('input', { type: 'password', autocomplete: 'current-password' });
+    var msg = el('p', { class: 'msg err' }, text || '');
+    var btn = el('button', { type: 'button', class: 'btn' }, 'Buka data');
+    async function go() {
+      if (!pw.value) return;
+      btn.disabled = true; btn.textContent = 'Membuka\u2026';
+      try {
+        state = await openState(pw.value);
+        store('hs_pass', pw.value); store('hs_admin', '1');
+        showAdmin();
+      } catch (e) {
+        msg.textContent = 'Password salah, atau data tidak bisa dibuka.';
+        btn.disabled = false; btn.textContent = 'Buka data';
+      }
+    }
+    btn.addEventListener('click', go);
+    pw.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+    main.appendChild(el('h1', null, 'Mode admin'));
+    main.appendChild(el('p', { class: 'lead' }, 'Data pesanan terkunci. Masukkan password admin untuk mengubah status.'));
+    main.appendChild(el('div', { class: 'search' }, field('Password admin', pw), btn));
+    main.appendChild(msg);
+    main.appendChild(el('button', { type: 'button', class: 'linkbtn', onclick: function () { unstore('hs_admin'); showCustomer(); } }, 'Kembali ke halaman customer'));
+  }
+
+  function showAdmin() {
+    if (!state) return showAdminLock();
+    view = 'admin';
+    main.textContent = '';
+    main.appendChild(el('h1', null, 'Mode admin'));
+    main.appendChild(el('p', { class: 'lead' }, STANDALONE
+      ? 'Ubah status pesanan di sini, lalu unduh halaman baru dan unggah ke hosting. Customer baru melihat perubahan setelah file di hosting diganti.'
+      : 'Ubah status pesanan di sini. Customer baru melihat perubahan setelah kamu menekan Terbitkan.'));
+    main.appendChild(el('div', { class: 'tools' },
+      button('Order baru', function () { ui.panel = ui.panel === 'new' ? null : 'new'; showAdmin(); }, ui.panel === 'new' ? '' : 'ghost'),
+      button('Pengaturan', function () { ui.panel = ui.panel === 'settings' ? null : 'settings'; showAdmin(); }, ui.panel === 'settings' ? '' : 'ghost'),
+      button('Lihat sebagai customer', function () { store('hs_admin', ''); showCustomer(); }, 'ghost')));
+    if (ui.panel === 'new') main.appendChild(newOrderPanel());
+    if (ui.panel === 'settings') main.appendChild(settingsPanel());
+
+    var list = el('ul', { class: 'rows' });
+    var filter = el('input', { type: 'text', placeholder: 'Cari kode atau username', value: ui.filter, 'aria-label': 'Cari order' });
+    filter.addEventListener('input', function () { ui.filter = filter.value; renderList(list); });
+    main.appendChild(el('h3', null, 'Pesanan (' + state.orders.length + ')'));
+    main.appendChild(filter);
+    main.appendChild(list);
+    renderList(list);
+    renderFoot();
+    updateBar();
+  }
+
+  function renderList(list) {
+    list.textContent = '';
+    var q = ui.filter.trim().toLowerCase();
+    var rows = state.orders.filter(function (o) { return !q || (o.kode + ' ' + (o.username || '')).toLowerCase().indexOf(q) >= 0; });
+    if (!rows.length) {
+      list.appendChild(el('li', { class: 'sub' }, state.orders.length ? 'Tidak ada order yang cocok.' : 'Belum ada order. Tambahkan lewat Order baru.'));
+      return;
+    }
+    rows.slice().reverse().forEach(function (o) {
+      var ev = o.events || [];
+      var cur = ev.length ? ev[ev.length - 1].status : 'Belum ada status';
+      var isOpen = ui.open === o.kode;
+      var row = el('li', { class: 'row' },
+        el('div', { class: 'row-head' },
+          el('div', null, el('div', { class: 'row-title' }, o.kode), el('div', { class: 'row-sub' }, (o.username || '-') + ' \u2022 Batch ' + (o.batch || '-'))),
+          el('span', { class: 'tag' }, cur),
+          button(isOpen ? 'Tutup' : 'Ubah', function () { ui.open = isOpen ? null : o.kode; renderList(list); }, 'small ghost')));
+      if (isOpen) row.appendChild(orderEditor(o, list));
+      list.appendChild(row);
+    });
+  }
+
+  function tahapList() {
+    return el('datalist', { id: 'tahap-list' }, TAHAP.map(function (t) { return el('option', { value: t }); }));
+  }
+  function negaraSelect(val) {
+    var s = el('select', null, Object.keys(NEGARA).map(function (k) { return el('option', { value: k }, NEGARA[k].f + ' ' + NEGARA[k].n); }));
+    s.value = val || 'KR';
+    return s;
+  }
+
+  function orderEditor(o, list) {
+    var wrap = el('div', { class: 'editor' });
+    var f = {
+      username: el('input', { type: 'text', value: o.username || '' }),
+      batch: el('input', { type: 'text', value: o.batch || '' }),
+      negara: negaraSelect(o.negara),
+      items: el('textarea', { value: itemsToText(o.items) }),
+      eks: el('input', { type: 'text', value: (o.resi && o.resi.ekspedisi) || '', placeholder: 'Contoh: J&T Express' }),
+      no: el('input', { type: 'text', value: (o.resi && o.resi.nomor) || '' })
+    };
+    f.items.value = itemsToText(o.items);
+    wrap.appendChild(el('h4', null, 'Data order'));
+    wrap.appendChild(el('div', { class: 'two' }, field('Username customer', f.username), field('Batch', f.batch)));
+    wrap.appendChild(field('Negara', f.negara));
+    wrap.appendChild(field('Barang (satu baris per barang: nama | varian | jumlah)', f.items));
+    wrap.appendChild(el('div', { class: 'two' }, field('Ekspedisi lokal', f.eks), field('Nomor resi (kosongkan jika belum ada)', f.no)));
+    wrap.appendChild(el('div', null, button('Simpan data order', function () {
+      var items = parseItems(f.items.value);
+      if (!f.username.value.trim() || !items.length) return;
+      o.username = f.username.value.trim();
+      o.batch = f.batch.value.trim();
+      o.negara = f.negara.value;
+      o.items = items;
+      o.resi = f.no.value.trim() ? { ekspedisi: f.eks.value.trim(), nomor: f.no.value.trim() } : null;
+      markDirty(o);
+      showAdmin();
+    }, 'small')));
+
+    var st = el('input', { type: 'text', list: 'tahap-list', placeholder: 'Pilih atau ketik status' });
+    var tg = el('input', { type: 'date', value: today() });
+    var ct = el('input', { type: 'text', placeholder: 'Contoh: Barang sudah sampai di gudang' });
+    wrap.appendChild(el('h4', null, 'Tambah status baru'));
+    wrap.appendChild(tahapList());
+    wrap.appendChild(el('div', { class: 'two' }, field('Status', st), field('Tanggal', tg)));
+    wrap.appendChild(field('Catatan untuk customer (opsional)', ct));
+    wrap.appendChild(el('div', null, button('Tambah status', function () {
+      var s = st.value.trim();
+      if (!s) { st.focus(); return; }
+      o.events.push({ status: s, tgl: tg.value || today(), catatan: ct.value.trim() });
+      sortEvents(o);
+      markDirty(o);
+      showAdmin();
+    }, 'small')));
+
+    wrap.appendChild(el('h4', null, 'Riwayat status'));
+    var evs = el('ul', { class: 'evs' });
+    o.events.forEach(function (e, i) {
+      evs.appendChild(el('li', null,
+        el('span', null, e.status + ' \u2013 ' + fmtDate(e.tgl)),
+        button('Hapus', function () { o.events.splice(i, 1); markDirty(o); showAdmin(); }, 'small ghost')));
+    });
+    if (!o.events.length) evs.appendChild(el('li', { class: 'sub' }, 'Belum ada status.'));
+    wrap.appendChild(evs);
+
+    var del = el('button', { type: 'button', class: 'btn danger small' }, 'Hapus order ini');
+    var armed = false;
+    del.addEventListener('click', function () {
+      if (!armed) {
+        armed = true; del.textContent = 'Klik lagi untuk menghapus';
+        setTimeout(function () { armed = false; del.textContent = 'Hapus order ini'; }, 3500);
+        return;
+      }
+      state.orders = state.orders.filter(function (x) { return x !== o; });
+      ui.open = null;
+      markDirty(null);
+      showAdmin();
+    });
+    wrap.appendChild(el('div', null, del));
+    return wrap;
+  }
+
+  function newOrderPanel() {
+    var touched = false;
+    var neg = negaraSelect('KR');
+    var kode = el('input', { type: 'text', value: genKode('KR'), autocapitalize: 'characters', spellcheck: 'false' });
+    kode.addEventListener('input', function () { touched = true; });
+    neg.addEventListener('change', function () { if (!touched) kode.value = genKode(neg.value); });
+    var user = el('input', { type: 'text', placeholder: '@username' });
+    var batch = el('input', { type: 'text', placeholder: 'Contoh: 3' });
+    var items = el('textarea', { placeholder: 'Laneige Lip Sleeping Mask | Berry | 2' });
+    var st = el('input', { type: 'text', list: 'tahap-list', value: TAHAP[0] });
+    var tg = el('input', { type: 'date', value: today() });
+    var msg = el('p', { class: 'msg err' });
+    var p = el('div', { class: 'panel' },
+      el('h3', null, 'Order baru'),
+      tahapList(),
+      el('div', { class: 'two' }, field('Username customer', user), field('Batch', batch)),
+      field('Negara', neg),
+      field('Barang (satu baris per barang: nama | varian | jumlah)', items),
+      field('Kode order (dibuat acak, boleh diganti)', kode),
+      el('p', { class: 'sub' }, 'Kode acak lebih aman daripada urutan seperti HST-KR-0012, karena tidak bisa ditebak customer lain.'),
+      el('div', { class: 'two' }, field('Status awal', st), field('Tanggal', tg)),
+      msg);
+    p.appendChild(el('div', null, button('Tambah order', function () {
+      var k = kode.value.trim().toUpperCase();
+      var its = parseItems(items.value);
+      if (!user.value.trim() || !its.length) { msg.textContent = 'Isi username dan minimal satu barang.'; return; }
+      if (norm(k).length < 10) { msg.textContent = 'Kode order terlalu pendek, pakai minimal 10 huruf/angka.'; return; }
+      if (state.orders.some(function (x) { return norm(x.kode) === norm(k); })) { msg.textContent = 'Kode order ini sudah dipakai.'; return; }
+      if (!st.value.trim()) { msg.textContent = 'Isi status awal.'; return; }
+      var o = {
+        kode: k, idx: null, username: user.value.trim(), negara: neg.value, batch: batch.value.trim(),
+        items: its, events: [{ status: st.value.trim(), tgl: tg.value || today(), catatan: '' }], resi: null
+      };
+      state.orders.push(o);
+      markDirty(o);
+      ui.panel = null; ui.open = o.kode;
+      showAdmin();
+    })));
+    return p;
+  }
+
+  function settingsPanel() {
+    var hint = el('input', { type: 'text', value: state.hint || '', placeholder: 'Teks bantuan di bawah kolom kode order' });
+    var p1 = el('input', { type: 'password', autocomplete: 'new-password' });
+    var p2 = el('input', { type: 'password', autocomplete: 'new-password' });
+    var msg = el('p', { class: 'msg' });
+    return el('div', { class: 'panel' },
+      el('h3', null, 'Pengaturan'),
+      field('Teks bantuan untuk customer (kosongkan untuk teks standar)', hint),
+      field('Password admin baru (kosongkan jika tidak diganti)', p1),
+      field('Ulangi password admin baru', p2),
+      msg,
+      el('div', null, button('Simpan pengaturan', function () {
+        if (p1.value || p2.value) {
+          if (p1.value.length < 8) { msg.className = 'msg err'; msg.textContent = 'Password minimal 8 karakter.'; return; }
+          if (p1.value !== p2.value) { msg.className = 'msg err'; msg.textContent = 'Kedua password harus sama.'; return; }
+          state.pass = p1.value;
+        }
+        state.hint = hint.value.trim();
+        state.dirty = true;
+        ui.panel = null;
+        showAdmin();
+      })));
+  }
+
+  async function discard() {
+    try { state = await openState(state.origPass); } catch (e) { state = null; }
+    ui.panel = null; ui.open = null;
+    showAdmin();
+  }
+
+  async function publish(pubBtn, cancelBtn, note) {
+    if (!art) return;
+    pubBtn.disabled = true; cancelBtn.disabled = true; pubBtn.textContent = STANDALONE ? 'Menyiapkan\u2026' : 'Menerbitkan\u2026';
+    try {
+      var c = {};
+      for (var i = 0; i < state.orders.length; i++) {
+        var o = state.orders[i];
+        if (o.idx && !state.dirtySet.has(o.kode) && vault.c[o.idx]) { c[o.idx] = vault.c[o.idx]; continue; }
+        var r = await sealFor('K|' + norm(o.kode), customerView(o), vault.salt);
+        o.idx = r.idx; c[r.idx] = r.blob;
+      }
+      var a = await sealFor('A|' + state.pass, { orders: state.orders.map(adminView) }, vault.salt);
+      var nv = { v: 1, salt: vault.salt, updated: new Date().toISOString(), hint: state.hint || '', c: c, a: a.blob };
+      var html = assembleDoc(css, src, nv);
+      if (src.length < 2000 || !css) throw { code: 'invalid_content' };
+      store('hs_pass', state.pass); store('hs_admin', '1');
+      await art.publish(html);
+      if (STANDALONE) {
+        note.textContent = 'File index.html sudah diunduh. Unggah untuk mengganti file lama di hosting.';
+        pubBtn.disabled = false; cancelBtn.disabled = false; pubBtn.textContent = 'Unduh lagi';
+      } else {
+        note.textContent = 'Sudah diterbitkan.';
+      }
+    } catch (e) {
+      note.textContent = errText(e);
+      pubBtn.disabled = false; cancelBtn.disabled = false; pubBtn.textContent = STANDALONE ? 'Unduh halaman baru' : 'Terbitkan';
+    }
+  }
+
+  function updateBar() {
+    if (!barEl) return;
+    barEl.textContent = '';
+    if (!state || !state.dirty || view !== 'admin') { barEl.hidden = true; return; }
+    barEl.hidden = false;
+    var note = el('p', null, art ? (STANDALONE ? 'Ada perubahan yang belum masuk ke file halaman.' : 'Ada perubahan yang belum diterbitkan.') : 'Penerbitan tidak tersedia di tampilan ini.');
+    var pub = el('button', { type: 'button', class: 'btn small', disabled: art ? null : true }, STANDALONE ? 'Unduh halaman baru' : 'Terbitkan');
+    var can = el('button', { type: 'button', class: 'btn small ghost' }, 'Batalkan');
+    pub.addEventListener('click', function () { publish(pub, can, note); });
+    can.addEventListener('click', discard);
+    barEl.appendChild(note); barEl.appendChild(pub); barEl.appendChild(can);
+  }
+
+  async function downloadDoc(html) {
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'index.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { try { URL.revokeObjectURL(url); } catch (e) { /* ignore */ } }, 4000);
+    return { version: 'download' };
+  }
+
+  /* ---------- shell ---------- */
+  function renderFoot() {
+    foot.textContent = '';
+    foot.appendChild(el('p', null, 'Status diperbarui manual oleh admin, jadi bisa ada jeda dari kondisi barang sebenarnya.'));
+    if (vault.updated) foot.appendChild(el('p', null, 'Data diperbarui ' + fmtDate(vault.updated.slice(0, 10)) + '.'));
+    if (canEdit) {
+      foot.appendChild(el('button', {
+        type: 'button', class: 'linkbtn',
+        onclick: function () { if (view === 'admin') { showCustomer(); } else { showAdmin(); } }
+      }, view === 'admin' ? 'Kembali ke halaman customer' : 'Mode admin'));
+    }
+  }
+
+  async function boot() {
+    vault = JSON.parse(document.getElementById('vault').textContent);
+    css = document.getElementById('app-css').textContent;
+    src = document.getElementById('app-src').textContent;
+    var root = document.getElementById('root');
+    main = el('main', { class: 'wrap main' });
+    foot = el('footer', { class: 'wrap foot' });
+    barEl = el('div', { class: 'bar', hidden: true });
+    root.appendChild(el('div', { class: 'edge', 'aria-hidden': 'true' }));
+    root.appendChild(el('header', { class: 'wrap top' },
+      el('div', { class: 'logo', role: 'img', 'aria-label': 'Logo HERSTOOD' }),
+      el('div', null, el('div', { class: 'brand' }, 'HERSTOOD'), el('div', { class: 'brand-sub' }, 'Lacak pesanan jastip'))));
+    root.appendChild(main); root.appendChild(foot); root.appendChild(barEl);
+    showCustomer();
+
+    if (STANDALONE) {
+      if (location.hash !== '#admin') return;
+      canEdit = true; art = { publish: downloadDoc };
+    } else {
+      try {
+        if (window.claude && window.claude.use) {
+          var u = await window.claude.use('user');
+          canEdit = u ? !!(await u.canEdit()) : false;
+          art = await window.claude.use('artifact');
+        }
+      } catch (e) { canEdit = false; }
+      if (!canEdit) return;
+    }
+    renderFoot();
+    var p = fetchStore('hs_pass');
+    if (p && fetchStore('hs_admin') === '1') {
+      try { state = await openState(p); showAdmin(); return; } catch (e) { unstore('hs_pass'); unstore('hs_admin'); }
+    }
+    if (STANDALONE) showAdmin();
+  }
+
+  if (typeof document === 'undefined') {
+    globalThis.HS = {
+      derive: derive, encryptWith: encryptWith, decryptWith: decryptWith, sealFor: sealFor,
+      customerView: customerView, adminView: adminView, assembleDoc: assembleDoc, newSalt: newSalt, norm: norm
+    };
+  } else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>
